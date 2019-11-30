@@ -1,0 +1,14 @@
+<td-layout>
+    <td-navigation-drawer flex sidenavTitle="" color="primary" #sidenav>
+        <menu [sidenav]="sidenav"></menu>
+    </td-navigation-drawer>
+    <td-layout-nav toolbarTitle="CJ TRANSPORTADORA" navigationRoute="/">
+        <button mat-icon-button td-menu-button tdLayoutToggle>
+        <mat-icon>menu</mat-icon>
+      </button>
+        <div td-toolbar-content layout="row" layout-align="start center" fxFlex class="push-left">
+            <span fxFlex></span>
+        </div>
+        <router-outlet></router-outlet>
+    </td-layout-nav>
+</td-layout>
