@@ -7,9 +7,11 @@ import { MatButtonModule, MatListModule, MatCardModule, MatMenuModule, MatInputM
   MatDatepickerModule, MatNativeDateModule, MatSliderModule, MatAutocompleteModule } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CovalentCommonModule, CovalentLayoutModule, CovalentMediaModule, CovalentExpansionPanelModule,
-  CovalentStepsModule, CovalentLoadingModule, CovalentDialogsModule, CovalentSearchModule, CovalentPagingModule,
+  CovalentStepsModule, CovalentLoadingModule, CovalentSearchModule, CovalentPagingModule,
   CovalentNotificationsModule, CovalentMenuModule, CovalentDataTableModule, CovalentMessageModule } from '@covalent/core';
+import { CovalentDialogsModule } from '@covalent/core/dialogs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material';
 import { FlexLayoutModule} from "@angular/flex-layout";
 import { AppRoutingModule } from './app-routing.module';
@@ -22,12 +24,40 @@ import { MenuComponent } from './view/menu/menu.component';
 import { EventoFormComponent } from './view/evento/evento-form/evento-form.component';
 import { EventoService } from './service/evento.service';
 import { MessagesService } from "./service/messages.service";
+import { FuncionarioFormComponent } from './view/funcionario/funcionario-form/funcionario-form.component';
+import { FuncionarioListComponent } from './view/funcionario/funcionario-list/funcionario-list.component';
+import { FuncionarioSearchComponent } from './view/funcionario/funcionario-search/funcionario-search.component';
+import { FuncionarioDetailComponent } from './view/funcionario/funcionario-detail/funcionario-detail.component';
+import { TransporteFormComponent } from './view/transporte/transporte-form/transporte-form.component';
+import { TransporteListComponent } from './view/transporte/transporte-list/transporte-list.component';
+import { TransporteSearchComponent } from './view/transporte/transporte-search/transporte-search.component';
+import { TransporteDetailComponent } from './view/transporte/transporte-detail/transporte-detail.component';
+import { UsuarioFormComponent } from './view/usuario/usuario-form/usuario-form.component';
+import { UsuarioListComponent } from './view/usuario/usuario-list/usuario-list.component';
+import { UsuarioSearchComponent } from './view/usuario/usuario-search/usuario-search.component';
+import { UsuarioDetailComponent } from './view/usuario/usuario-detail/usuario-detail.component';
+import { LoginComponent } from './view/login/login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    EventoFormComponent
+    EventoFormComponent,
+    FuncionarioFormComponent,
+    FuncionarioListComponent,
+    FuncionarioSearchComponent,
+    FuncionarioDetailComponent,
+    TransporteFormComponent,
+    TransporteListComponent,
+    TransporteSearchComponent,
+    TransporteDetailComponent,
+    UsuarioFormComponent,
+    UsuarioListComponent,
+    UsuarioSearchComponent,
+    UsuarioDetailComponent,
+    LoginComponent,
+  
   ],
   imports: [
     HttpModule,
@@ -38,6 +68,8 @@ import { MessagesService } from "./service/messages.service";
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,
+
 
 
     MatButtonModule,

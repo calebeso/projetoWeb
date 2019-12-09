@@ -1,0 +1,63 @@
+<div fxLayout="column">
+    <div fxLayout="row" class="header-form">
+        <span fxFlex>Cadastrar/Alterar Transporte</span>
+        <div>
+            <button mat-raised-button class="form-button bgc-grey-500 tc-grey-50" (click)="onBack()">
+          Cancelar
+        </button>
+            <button [disabled]="transporteForm.invalid" mat-raised-button color="accent" class="form-button" (click)="onSave()">
+          Salvar
+        </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <mat-card class="background-color" fxFlex="90">
+            <form [formGroup]="transporteForm" novalidate>
+                <div fxLayout="column" fxFlex=90>
+
+                    <div fxLayout="column">
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Modelo-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Modelo</mat-label>
+                                <input matInput id="modelo" formControlName="modelo" placeholder="modelo" layout-align="center end" required>
+                                <mat-error *ngIf="transporteForm.get('modelo').hasError('maxLength')">
+                                    Máximo 144 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="transporteForm.get('modelo').hasError('required')">
+                                    Modelo é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxFlex=50>
+                            <!--PLaca-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Placa</mat-label>
+                                <input matInput id="placa" formControlName="placa" placeholder="Placa" layout-align="center end" required>
+                                <mat-error *ngIf="transporteForm.get('placa').hasError('maxLength')">
+                                    Máximo 8 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="transporteForm.get('placa').hasError('required')">
+                                    Placa é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Consumo -->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Consumo Km/L</mat-label>
+                                <input matInput id="consumoTransporte" formControlName="consumoTransporte" placeholder="Km/L" layout-align="center end" required>
+                                <mat-error *ngIf="transporteForm.get('consumoTransporte').hasError('maxLength')">
+                                    Máximo 11 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="transporteForm.get('consumoTransporte').hasError('required')">
+                                    Consumo é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>
