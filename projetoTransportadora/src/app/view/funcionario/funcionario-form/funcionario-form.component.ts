@@ -31,7 +31,7 @@ export class FuncionarioFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.funcionario = new Funcionario(null, null, null, null, null);
+    this.funcionario = new Funcionario(null, null, null, null, null, null);
     this.createForm();
     this.funcionario.id = this.activatedRoute.snapshot.params['id'];
     if (this.funcionario.id) {

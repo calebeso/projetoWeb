@@ -4,7 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatListModule, MatCardModule, MatMenuModule, MatInputModule, MatButtonToggleModule, MatIconModule,
   MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatToolbarModule,
   MatTabsModule, MatSidenavModule, MatTooltipModule, MatRippleModule, MatRadioModule, MatGridListModule,
-  MatDatepickerModule, MatNativeDateModule, MatSliderModule, MatAutocompleteModule } from '@angular/material';
+  MatDatepickerModule, MatNativeDateModule, MatSliderModule } from '@angular/material';
+  import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CovalentCommonModule, CovalentLayoutModule, CovalentMediaModule, CovalentExpansionPanelModule,
   CovalentStepsModule, CovalentLoadingModule, CovalentSearchModule, CovalentPagingModule,
@@ -37,6 +38,11 @@ import { UsuarioListComponent } from './view/usuario/usuario-list/usuario-list.c
 import { UsuarioSearchComponent } from './view/usuario/usuario-search/usuario-search.component';
 import { UsuarioDetailComponent } from './view/usuario/usuario-detail/usuario-detail.component';
 import { LoginComponent } from './view/login/login/login.component';
+import { FuncionarioService } from './service/funcionario.service';
+import { TransporteService } from './service/transporte.service';
+import { EventoListComponent } from './view/evento/evento-list/evento-list.component';
+import { EventoSearchComponent } from './view/evento/evento-search/evento-search.component';
+import { EventoDetailComponent } from './view/evento/evento-detail/evento-detail.component';
 
 
 @NgModule({
@@ -57,6 +63,9 @@ import { LoginComponent } from './view/login/login/login.component';
     UsuarioSearchComponent,
     UsuarioDetailComponent,
     LoginComponent,
+    EventoListComponent,
+    EventoSearchComponent,
+    EventoDetailComponent,
   
   ],
   imports: [
@@ -114,6 +123,8 @@ import { LoginComponent } from './view/login/login/login.component';
 
   ],
   providers: [
+    FuncionarioService,
+    TransporteService,
     EventoService,
     MessagesService
   ],

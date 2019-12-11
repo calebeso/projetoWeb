@@ -1,3 +1,4 @@
+import { Evento } from './evento';
 
 
 export class Funcionario {
@@ -6,6 +7,7 @@ export class Funcionario {
         public nome: string,
         public cpf: string, 
         public cnh: string,
-        public dataNascimento: Date
+        public dataNascimento: Date,
+        public eventos : Evento[]
     ){}
 }

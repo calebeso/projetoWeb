@@ -30,7 +30,7 @@ export class TransporteDetailComponent implements OnInit {
 
   loadDados(){
     this.transporteService.detalhar(this.transporte.id).subscribe(res => {
-      this.transporte = new Transporte(res.id, res.modelo, res.placa, res.consumoTransporte, res.funcionario);
+      this.transporte = new Transporte(res.id, res.modelo, res.placa, res.consumoTransporte, res.eventos);
     },
     (error: any) => {
       this.messageService.toastError(error.error.message);

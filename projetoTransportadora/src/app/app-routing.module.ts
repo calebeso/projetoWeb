@@ -11,6 +11,8 @@ import { UsuarioFormComponent } from './view/usuario/usuario-form/usuario-form.c
 import { UsuarioSearchComponent } from './view/usuario/usuario-search/usuario-search.component';
 import { UsuarioDetailComponent } from './view/usuario/usuario-detail/usuario-detail.component';
 import { LoginComponent } from './view/login/login/login.component';
+import { EventoSearchComponent } from './view/evento/evento-search/evento-search.component';
+import { EventoDetailComponent } from './view/evento/evento-detail/evento-detail.component';
 const routes: Routes = [
   {
     component: LoginComponent,
@@ -18,11 +20,19 @@ const routes: Routes = [
   },
   {
     component: EventoFormComponent,
-    path: 'evento/cadastrar'
+    path: 'eventos/cadastrar'
+  },
+  {
+    component: EventoSearchComponent,
+    path: 'eventos'
   },
   {
     component: EventoFormComponent,
-    path: 'evento/alterar/:id'
+    path: 'eventos/alterar/:id'
+  },
+  {
+    component: EventoDetailComponent,
+    path: 'eventos/detalhes/:id'
   },
   {
     component: FuncionarioSearchComponent,

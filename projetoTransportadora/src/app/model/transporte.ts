@@ -7,6 +7,6 @@ export class Transporte {
         public modelo: string, 
         public placa: string, 
         public consumoTransporte: number, 
-        public funcionario: Funcionario
+        public eventos : Evento[]
     ){}
 }

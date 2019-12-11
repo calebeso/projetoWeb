@@ -22,7 +22,7 @@ export class FuncionarioDetailComponent implements OnInit {
     private messageService: MessagesService) { }
 
   ngOnInit() {
-    this.funcionario = new Funcionario(null, null, null, null, null);
+    this.funcionario = new Funcionario(null, null, null, null, null, null);
     this.funcionario.id = this.activatedRoute.snapshot.params['id'];
     if (this.funcionario.id) {
       this.loadDados();
@@ -33,7 +33,7 @@ export class FuncionarioDetailComponent implements OnInit {
 
   loadDados(){
     this.funcionarioService.detalhar(this.funcionario.id).subscribe(res => {
-      this.funcionario = new Funcionario(res.id, res.nome, res.cpf, res.cnh, res.dataNascimento);
+      this.funcionario = new Funcionario(res.id, res.nome, res.cpf, res.cnh, res.dataNascimento, res.eventos);
       
     },
     (error: any) => {

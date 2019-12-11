@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/model/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { AuthUserService } from 'src/app/service/auth-user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +15,16 @@ export class LoginComponent implements OnInit {
 
   public usuario : Usuario; 
 
-
   constructor(private fb: FormBuilder,
     private router : Router,
     private activatedRoute: ActivatedRoute,
+    private loginService: AuthUserService
   ) { }
 
+   id: number; 
    username: string; 
-   password: string; 
+   password: string;
+   invalidLogin = false;  
 
   ngOnInit() {
     this.usuario = new Usuario(null, null, null);
@@ -32,12 +35,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    if(this.username == this.usuario.login && this.password == this.usuario.senha){
-      this.router.navigate([""]);
-    }else{
-      alert("Credenciais inválidas!")
-    }
-  
-  }
+    if(this.loginService.Authentication(this.usuario.id, this.usuario.login, this.usuario.senha)
+    ){
+      this.router.navigate(['usuario/cadastrar'])
+      this.invalidLogin = false
+    }else
+      this.invalidLogin = true
+}
 
 }
