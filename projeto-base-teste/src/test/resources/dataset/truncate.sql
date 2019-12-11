@@ -1,0 +1,5 @@
+
+TRUNCATE funcionario CASCADE;
+TRUNCATE transporte CASCADE;
+TRUNCATE usuario CASCADE;
+TRUNCATE evento CASCADE;
