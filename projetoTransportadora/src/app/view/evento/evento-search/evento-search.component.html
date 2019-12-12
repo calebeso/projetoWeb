@@ -1,0 +1,13 @@
+<div fxLayout="column" fxFlex class="div-content">
+
+    <div fxLayout="row" class="header-form">
+        <span fxFlex>Consulta de Eventos</span>
+        <div>
+            <button mat-raised-button color="accent" (click)="navigateToNovo()">Novo Evento</button>
+        </div>
+    </div>
+
+    <div fxFlex>
+        <app-evento-list [evento]="evento" (selecionarEvento)="navigateTo($event)"></app-evento-list>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div fxLayout="column">
+    <div fxLayout="row" class="header-form">
+        <span fxFlex>Cadastrar/Alterar Usuario</span>
+        <div>
+            <button mat-raised-button class="form-button bgc-grey-500 tc-grey-50" (click)="onBack()">
+          Cancelar
+        </button>
+            <button [disabled]="usuarioForm.invalid" mat-raised-button color="accent" class="form-button" (click)="onSave()">
+          Salvar
+        </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <mat-card class="background-color" fxFlex="90">
+            <form [formGroup]="usuarioForm" novalidate>
+                <div fxLayout="column" fxFlex=100>
+
+                    <div fxLayout="column">
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Login-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Login</mat-label>
+                                <input matInput id="login" formControlName="login" placeholder="Login" layout-align="center end" required>
+                                <mat-error *ngIf="usuarioForm.get('login').hasError('maxLength')">
+                                    Máximo 144 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="usuarioForm.get('login').hasError('required')">
+                                    Login é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Senha-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Senha</mat-label>
+                                <input matInput id="senha" type="password" formControlName="senha" placeholder="Senha" layout-align="center end" required>
+                                <mat-error *ngIf="usuarioForm.get('senha').hasError('maxLength')">
+                                    Máximo 8 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="usuarioForm.get('senha').hasError('required')">
+                                    Senha é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

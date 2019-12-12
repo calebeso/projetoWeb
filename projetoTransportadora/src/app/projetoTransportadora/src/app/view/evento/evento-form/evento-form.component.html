@@ -1,0 +1,120 @@
+<div fxLayout="column">
+    <div fxLayout="row" class="header-form">
+        <span fxFlex>Cadastrar/Alterar Funcionario</span>
+        <div>
+            <button mat-raised-button class="form-button bgc-grey-500 tc-grey-50" (click)="onBack()">
+          Cancelar
+        </button>
+            <button [disabled]="eventoForm.invalid" mat-raised-button color="accent" class="form-button" (click)="onSave()">
+          Salvar
+        </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <mat-card class="background-color" fxFlex="90">
+            <form [formGroup]="eventoForm" novalidate>
+                <div fxLayout="column" fxFlex=90>
+
+                    <div fxLayout="column">
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Nome-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Nome</mat-label>
+                                <input matInput id="nome" formControlName="nome" placeholder="Nome" layout-align="center end" required>
+                                <mat-error *ngIf="eventoForm.get('nome').hasError('maxLength')">
+                                    Máximo 144 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="eventoForm.get('nome').hasError('required')">
+                                    Nome é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Cidade Dest-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Destino</mat-label>
+                                <input matInput id="cidadeDestino" formControlName="cidadeDestino" placeholder="Cidade de Destino" layout-align="center end" required>
+                                <mat-error *ngIf="eventoForm.get('cidadeDestino').hasError('maxLength')">
+                                    Máximo 144 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="eventoForm.get('cidadeDestino').hasError('required')">
+                                    Nome é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Km-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Km</mat-label>
+                                <input matInput id="km" formControlName="km" placeholder="Km" layout-align="center end" required>
+                                <mat-error *ngIf="eventoForm.get('km').hasError('maxLength')">
+                                    Máximo 144 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="eventoForm.get('km').hasError('required')">
+                                    Nome é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Data de saida-->
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="Escolha uma data" formControlName="dataSaida" required>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Hora saida-->
+                            <mat-form-field>
+                                <mat-label> Hora </mat-label>
+                                <input matInput type="time" placeholder="Escolha uma data" formControlName="horaSaida" required>
+                                <mat-error *ngIf="eventoForm.get('horaSaida').hasError('required')">
+                                    Nome é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Funcionarios-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Funcionarios</mat-label>
+                                <input type="text" placeholder="Selecione um funcionario" matInput id="funcionario" formControlName="funcionario" [matAutocomplete]="auto" required>
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFuncionario" (optionSelected)="selectFuncionario($event)">
+                                    <mat-option *ngFor="let item of funcionarioList" [value]="item">
+                                        {{item.nome}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-error *ngIf="eventoForm.get('funcionario').hasError('required')">
+                                    Departamento é obrigatório.
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Transporte-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Transporte</mat-label>
+                                <input type="text" placeholder="Selecione um transporte" matInput id="transporte" formControlName="transporte" [matAutocomplete]="autoTran" required>
+                                <mat-autocomplete #autoTran="matAutocomplete" [displayWith]="displayTransporte" (optionSelected)="selectTransporte($event)">
+                                    <mat-option *ngFor="let item of transporteList" [value]="item">
+                                        {{item.modelo}}
+                                    </mat-option>
+                                </mat-autocomplete>
+
+                            </mat-form-field>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

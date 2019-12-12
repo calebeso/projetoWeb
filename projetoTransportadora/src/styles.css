@@ -1,13 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '~font-awesome/css/font-awesome.css';
 html,
 body {
     height: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
     overflow-y: hidden;
 }
 
@@ -17,7 +18,7 @@ body {
 
 .full-background {
     width: 100%;
-    background-color: gray;
+    background-color: white;
     height: 100% !important;
 }
 
@@ -33,16 +34,9 @@ body {
     height: 100% !important;
 }
 
-#link-recupera-senha {
-    color: #71848b;
-    text-decoration: underline;
-    cursor: pointer;
-    margin: 50px;
-}
-
 .header-form {
     padding: 30px 20px 30px 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background-color: gray;
 }
 
@@ -53,10 +47,11 @@ body {
 .item-list {
     background-color: white;
     border: 1px solid;
+    border-color: lightblue;
 }
 
 .item-list:hover {
-    background-color: gray;
+    background-color: lightgray;
     font-weight: bold;
     cursor: pointer;
 }
@@ -68,7 +63,7 @@ body {
 }
 
 .button-option:hover {
-    background-color: whitesmoke;
+    background-color: lightgray;
     cursor: pointer;
 }
 
@@ -78,6 +73,7 @@ body {
 
 .field-detail {
     margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 

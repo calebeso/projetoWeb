@@ -1,0 +1,13 @@
+<mat-card class="background-color" fxFlex>
+    <mat-list *ngFor="let even of evento" role="list">
+        <mat-list-item class="item-list" role="listitem" fxFlex>
+            <div fxFlex (click)="selecionar(even.id, 0)">
+                <span fxFlex>{{even.nome | uppercase}}</span>
+            </div>
+            <button class="button-option" (click)="selecionar(even.id, 1)">
+                            <mat-icon>edit</mat-icon></button>
+            <button class="button-option" (click)="selecionar(even.id, 2)">
+                            <mat-icon>delete</mat-icon></button>
+        </mat-list-item>
+    </mat-list>
+</mat-card>

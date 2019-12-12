@@ -1,0 +1,49 @@
+<div fxLayout="column">
+    <div fxLayout="row" class="header-form">
+        <span fxFlex>Visualizar Funcionário</span>
+        <div>
+            <button mat-raised-button class="form-button bgc-grey-500 tc-grey-50" (click)="onBack()">
+                Voltar
+            </button>
+            <button mat-raised-button color="accent" (click)="navigateToEdit()">
+                Editar
+            </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <mat-card class="background-color" fxFlex="90">
+
+            <div fxLayout="column" fxFlex=90>
+
+                <div fxLayout="column">
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>ID:</span>
+                        <span class="label-detail-value">{{funcionario.id}}</span>
+                    </div>
+
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>Nome:</span>
+                        <span class="label-detail-value">{{funcionario.nome}}</span>
+                    </div>
+
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>CPF:</span>
+                        <span class="label-detail-value">{{funcionario.cpf}}</span>
+                    </div>
+
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>CNH:</span>
+                        <span class="label-detail-value">{{funcionario.cnh}}</span>
+                    </div>
+
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>Data de Nascimento:</span>
+                        <span class="label-detail-value">{{funcionario.dataNascimento | date : 'dd/MM/yyyy'}}</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

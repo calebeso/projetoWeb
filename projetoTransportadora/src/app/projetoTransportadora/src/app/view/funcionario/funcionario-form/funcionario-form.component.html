@@ -1,0 +1,73 @@
+<div fxLayout="column">
+    <div fxLayout="row" class="header-form">
+        <span fxFlex>Cadastrar/Alterar Funcionario</span>
+        <div>
+            <button mat-raised-button class="form-button bgc-grey-500 tc-grey-50" (click)="onBack()">
+          Cancelar
+        </button>
+            <button [disabled]="funcionarioForm.invalid" mat-raised-button color="accent" class="form-button" (click)="onSave()">
+          Salvar
+        </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <mat-card class="background-color" fxFlex="90">
+            <form [formGroup]="funcionarioForm" novalidate>
+                <div fxLayout="column" fxFlex=90>
+
+                    <div fxLayout="column">
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Nome-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>Nome</mat-label>
+                                <input matInput id="nome" formControlName="nome" placeholder="Nome" layout-align="center end" required>
+                                <mat-error *ngIf="funcionarioForm.get('nome').hasError('maxLength')">
+                                    Máximo 144 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="funcionarioForm.get('nome').hasError('required')">
+                                    Nome é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Cpf-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>CPF</mat-label>
+                                <input matInput id="cpf" formControlName="cpf" placeholder="CPF" layout-align="center end" required>
+                                <mat-error *ngIf="funcionarioForm.get('cpf').hasError('maxLength')">
+                                    Máximo 11 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="funcionarioForm.get('cpf').hasError('required')">
+                                    CPF é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Cnh-->
+                            <mat-form-field fxFlex [floatLabel]="'always'">
+                                <mat-label>CNH</mat-label>
+                                <input matInput id="cnh" formControlName="cnh" placeholder="CNH" layout-align="center end" required>
+                                <mat-error *ngIf="funcionarioForm.get('cnh').hasError('maxLength')">
+                                    Máximo 11 caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="funcionarioForm.get('cnh').hasError('required')">
+                                    CNH é obrigatório.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div fxLayout="row" fxFlex=50>
+                            <!--Data de nascimento-->
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="Escolha uma data" formControlName="dataNascimento" required>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

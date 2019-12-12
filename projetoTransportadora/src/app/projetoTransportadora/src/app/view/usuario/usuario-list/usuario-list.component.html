@@ -1,0 +1,13 @@
+<mat-card class="background-color" fxFlex>
+    <mat-list *ngFor="let usu of usuario" role="list">
+        <mat-list-item class="item-list" role="listitem" fxFlex>
+            <div fxFlex (click)="selecionar(usu.id, 0)">
+                <span fxFlex>{{usu.login | uppercase}}</span>
+            </div>
+            <button class="button-option" (click)="selecionar(usu.id, 1)">
+                            <mat-icon>edit</mat-icon></button>
+            <button class="button-option" (click)="selecionar(usu.id, 2)">
+                            <mat-icon>delete</mat-icon></button>
+        </mat-list-item>
+    </mat-list>
+</mat-card>

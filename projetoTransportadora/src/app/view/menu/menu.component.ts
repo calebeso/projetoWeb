@@ -69,18 +69,19 @@ export class MenuComponent implements OnInit
           label: "Cadastros Básicos",
           menuList: [
             { icon: 'event', label: 'Eventos', routerlink: 'eventos'},
-            { icon: 'people', label: 'Usuários', routerlink: 'usuarios'},
-            { icon: 'people', label: 'Funcionários', routerlink: 'funcionarios'},
-            { icon: 'car', label: 'Transportes', routerlink: 'transportes' }
+            { icon: 'account_circle', label: 'Usuários', routerlink: 'usuario/cadastrar'},
+            { icon: 'people', label: 'Funcionários', routerlink: 'funcionarios/cadastrar'},
+            { icon: 'directions_bus', label: 'Transportes', routerlink: 'transporte/cadastrar' }
           ],
           open: false
         },
         {
           label: "Lista",
           menuList: [
-            { icon: 'store', label: 'Eventos', routerlink: 'eventos' },
-            { icon: 'store', label: 'Funcionarios', routerlink: 'funcionarios'},
-            { icon: 'store', label: 'Transporte', routerlink: 'transportes'}
+            { icon: 'event', label: 'Eventos', routerlink: 'eventos' },
+            { icon: 'people', label: 'Funcionarios', routerlink: 'funcionarios'},
+            { icon: 'directions_bus', label: 'Transporte', routerlink: 'transporte'},
+            { icon: 'account_circle', label: 'Usuários', routerlink: 'usuario'}
           ],
           open: false
         }
