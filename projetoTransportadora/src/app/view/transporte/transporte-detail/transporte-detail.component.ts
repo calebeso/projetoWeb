@@ -11,6 +11,7 @@ import { MessagesService } from 'src/app/service/messages.service';
 })
 export class TransporteDetailComponent implements OnInit {
 
+  //Instancia objeto transporte
   public transporte: Transporte; 
 
   constructor(
@@ -20,6 +21,7 @@ export class TransporteDetailComponent implements OnInit {
     private messageService: MessagesService,
   ) { }
 
+  //Metodo de iniciacao
   ngOnInit() {
     this.transporte = new Transporte(null, null, null, null, null);
     this.transporte.id = this.activatedRoute.snapshot.params['id'];
@@ -28,6 +30,7 @@ export class TransporteDetailComponent implements OnInit {
     }
   }
 
+    //Metódo que popula os campos com os dados corretos
   loadDados(){
     this.transporteService.detalhar(this.transporte.id).subscribe(res => {
       this.transporte = new Transporte(res.id, res.modelo, res.placa, res.consumoTransporte, res.eventos);
@@ -39,13 +42,14 @@ export class TransporteDetailComponent implements OnInit {
     
   }
 
+  //Volta a página
   onBack() {
 
     this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
     
   }
 
-
+//Redireciona para página de alteração do evento
   navigateToEdit() {
     this.router.navigate(['../../alterar/'+this.transporte.id], { relativeTo: this.activatedRoute });
   }

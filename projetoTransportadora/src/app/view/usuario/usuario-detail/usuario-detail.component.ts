@@ -11,6 +11,7 @@ import { MessagesService } from 'src/app/service/messages.service';
 })
 export class UsuarioDetailComponent implements OnInit {
 
+  //Instancia objeto usuario
   public usuario: Usuario;
 
 
@@ -22,6 +23,7 @@ export class UsuarioDetailComponent implements OnInit {
     private messageService: MessagesService
   ) { }
 
+  //Metodo de iniciacao
   ngOnInit() {
     this.usuario = new Usuario(null, null, null);
     this.usuario.id = this.activatedRoute.snapshot.params['id'];
@@ -30,6 +32,7 @@ export class UsuarioDetailComponent implements OnInit {
     }
   }
 
+   //Metódo que popula os campos com os dados corretos
   loadDados(){
     this.usuarioServie.detalhar(this.usuario.id).subscribe(res => {
       this.usuario = new Usuario(res.id, res.login, res.senha);
@@ -41,13 +44,14 @@ export class UsuarioDetailComponent implements OnInit {
     
   }
 
+//Volta a página
   onBack() {
 
     this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
     
   }
 
-
+//Redireciona para página de alteração do evento
   navigateToEdit() {
     this.router.navigate(['../../alterar/'+this.usuario.id], { relativeTo: this.activatedRoute });
   }

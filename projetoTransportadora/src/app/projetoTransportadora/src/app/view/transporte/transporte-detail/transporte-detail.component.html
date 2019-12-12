@@ -1,0 +1,44 @@
+<div fxLayout="column">
+    <div fxLayout="row" class="header-form">
+        <span fxFlex>Visualizar Transportes</span>
+        <div>
+            <button mat-raised-button class="form-button bgc-grey-500 tc-grey-50" (click)="onBack()">
+                Voltar
+            </button>
+            <button mat-raised-button color="accent" (click)="navigateToEdit()">
+                Editar
+            </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <mat-card class="background-color" fxFlex="90">
+
+            <div fxLayout="column" fxFlex=90>
+
+                <div fxLayout="column">
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>ID:</span>
+                        <span class="label-detail-value">{{transporte.id}}</span>
+                    </div>
+
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>Modelo:</span>
+                        <span class="label-detail-value">{{transporte.modelo}}</span>
+                    </div>
+
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>Placa:</span>
+                        <span class="label-detail-value">{{transporte.placa}}</span>
+                    </div>
+
+                    <div fxLayout="column" fxFlex=50 class="field-detail">
+                        <span>Consumo Veiculo Km/L:</span>
+                        <span class="label-detail-value">{{transporte.consumoTransporte}}</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { Evento } from './evento';
 
-
+//Modelo de funcionario//
 export class Funcionario {
     constructor(
         public id: number,

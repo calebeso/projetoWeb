@@ -10,8 +10,8 @@ export class AuthUserService {
 
   constructor() { }
 
-  Authentication( id, username, password){
-    if(id != null && username === this.usuario.login && password === this.usuario.senha){
+  Authentication( username, password){
+    if(username === this.usuario.login && password === this.usuario.senha){
       sessionStorage.setItem('username', 'password')
       return true; 
     } else{

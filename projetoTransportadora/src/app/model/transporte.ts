@@ -1,6 +1,7 @@
 import { Evento } from './evento';
 import { Funcionario } from './funcionario';
 
+//Modelo de transporte//
 export class Transporte {
     constructor(
         public id: number, 

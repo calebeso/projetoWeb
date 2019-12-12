@@ -12,6 +12,7 @@ import * as moment from 'moment';
 })
 export class EventoDetailComponent implements OnInit {
 
+  //Instancia objeto evento//
   public evento: Evento;
 
   constructor(private eventoService: EventoService,
@@ -19,6 +20,7 @@ export class EventoDetailComponent implements OnInit {
     private router: Router,
     private messageService: MessagesService) { }
 
+    //Metódo de iniciação
   ngOnInit() {
     this.evento = new Evento(null, null, null, null, null, null, null, null, null);
     this.evento.id = this.activatedRoute.snapshot.params['id'];
@@ -27,6 +29,7 @@ export class EventoDetailComponent implements OnInit {
     }
   }
 
+  //Metódo que popula os campos com os dados corretos
   loadDados(){
     this.eventoService.detalhar(this.evento.id).subscribe(res => {
       this.evento = new Evento(res.id, res.cidadeDestino,res.dataSaida, res.horaSaida, res.km, res.nome, res.status, res.transporte, res.funcionario);
@@ -38,12 +41,14 @@ export class EventoDetailComponent implements OnInit {
 
 }
 
+//Volta a página
 onBack() {
 
   this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
   
 }
 
+//Redireciona para página de alteração do evento
 navigateToEdit() {
   this.router.navigate(['../../alterar/'+this.evento.id], { relativeTo: this.activatedRoute });
 }

@@ -29,5 +29,17 @@ export class EventoService {
     return this.http.get('http://localhost:4200/api/api/evento/remove?id='+eventoId);
 
   }
+
+  iniciar(eventoId: number){
+    return this.http.get('http://localhost:4200/api/api/evento/start?id='+eventoId);
+  }
+
+  finalizar(eventoId: number){
+    return this.http.get('http://localhost:4200/api/api/evento/stop?id='+eventoId);
+  }
+
+  cancelar(eventoId: number){
+    return this.http.get('http://localhost:4200/api/api/evento/cancel?id='+eventoId);
+  }
 }
 

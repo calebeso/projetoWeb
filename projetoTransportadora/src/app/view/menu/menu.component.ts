@@ -78,8 +78,8 @@ export class MenuComponent implements OnInit
         {
           label: "Lista",
           menuList: [
-            { icon: 'store', label: 'Eventos', routerlink: 'eventos' },
-            { icon: 'store', label: 'Funcionarios', routerlink: 'funcionarios'},
+            { icon: 'event', label: 'Eventos', routerlink: 'eventos' },
+            { icon: 'people', label: 'Funcionarios', routerlink: 'funcionarios'},
             { icon: 'directions_bus', label: 'Transporte', routerlink: 'transporte'},
             { icon: 'account_circle', label: 'Usuários', routerlink: 'usuario'}
           ],

@@ -1,3 +1,3 @@
 
-export let TipoAcaoValues: string[] = ['DETALHAR', 'EDITAR' , 'REMOVER'];
-export type TipoAcao = 'DETALHAR' | 'EDITAR' | 'REMOVER';
+export let TipoAcaoValues: string[] = ['DETALHAR', 'EDITAR' , 'REMOVER', 'INICIAR', 'FINALIZAR', 'CANCELAR'];
+export type TipoAcao = 'DETALHAR' | 'EDITAR' | 'REMOVER' | 'INICIAR' | 'FINALIZAR' | 'CANCELAR';

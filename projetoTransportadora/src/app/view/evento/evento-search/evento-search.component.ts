@@ -5,6 +5,7 @@ import { EventoService } from 'src/app/service/evento.service';
 import { TipoAcaoValues } from 'src/app/model/tipo-acao';
 import { MessagesService } from 'src/app/service/messages.service';
 import { TdDialogService } from '@covalent/core/dialogs';
+import { Status } from 'src/app/model/situacao-evento';
 
 @Component({
   selector: 'app-evento-search',
@@ -12,6 +13,10 @@ import { TdDialogService } from '@covalent/core/dialogs';
   styleUrls: ['./evento-search.component.css']
 })
 export class EventoSearchComponent implements OnInit {
+
+  situacaoEvento : Array<Status>; 
+
+  private eventos : Evento; 
 
   evento: Array<Evento>; 
 
@@ -42,6 +47,12 @@ export class EventoSearchComponent implements OnInit {
     
     } else if(evento.acaoRealizada == TipoAcaoValues[2]){
       this.remover(id);
+    } else if(evento.acaoRealizada == TipoAcaoValues[3]){
+      this.iniciar(id);
+    } else if(evento.acaoRealizada == TipoAcaoValues[4]){
+      this.finalizar(id);
+    } else if(evento.acaoRealizada == TipoAcaoValues[5]){
+      this.cancelar(id);
     }
     
   }
@@ -53,6 +64,104 @@ export class EventoSearchComponent implements OnInit {
     },
     (error: any) => {
       this.messageService.toastError(error.error.message);
+    });
+  }
+
+  cancelar(id: number){
+    this.openCancelarConfirm(id);
+  }
+
+ openCancelarConfirm(id: number): void {
+    this._dialogService.openPrompt({
+      message: 'Por que deseja cancelar este evento?',
+      disableClose: false, // defaults to false
+      viewContainerRef: this._viewContainerRef, //OPTIONAL
+      title: 'Cancelar Evento', //OPTIONAL, hides if not provided
+      value: 'Motivo cancelamento', //OPTIONAL
+      cancelButton: 'Cancel', //OPTIONAL, defaults to 'CANCEL'
+      acceptButton: 'Ok', //OPTIONAL, defaults to 'ACCEPT'
+      width: '500px', //OPTIONAL, defaults to 400px
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (this.eventoService.iniciar(id)) {
+        this.messageService.toastError('Evento não foi iniciado.');
+      }
+      if (accept) {
+        this.eventoService.cancelar(id).subscribe(dados => {
+          this.messageService.toastSuccess('Evento cancelado com sucesso.');
+          this.listar();
+      },
+      (error: any) => {
+        console.log(error.error.message);
+        this.messageService.toastError(error.error.message);
+        
+      });
+    } else {
+      // DO SOMETHING ELSE
+    }
+  });
+}
+
+
+  finalizar(id: number){
+    this.openFinalizarConfirm(id);
+  }
+
+  openFinalizarConfirm(id: number): void {
+    this._dialogService.openConfirm({
+      message: 'Tem certeza que deseja finalizar esse evento?',
+      disableClose: true, // defaults to false
+      viewContainerRef: this._viewContainerRef, //OPTIONAL
+      title: 'Finalizar evento', //OPTIONAL, hides if not provided
+      cancelButton: 'Não', //OPTIONAL, defaults to 'CANCEL'
+      acceptButton: 'Sim', //OPTIONAL, defaults to 'ACCEPT'
+      width: '500px', //OPTIONAL, defaults to 400px
+    }).afterClosed().subscribe((accept: boolean) => {
+        if(this.eventoService.iniciar(id)){
+          this.messageService.toastError('Evento não foi iniciado.');
+        }
+        if (accept) {
+          this.eventoService.finalizar(id).subscribe(dados => {
+          this.messageService.toastSuccess('Evento finalizado com sucesso.');
+          this.listar();
+        },
+        (error: any) => {
+          console.log(error.error.message);
+          this.messageService.toastError(error.error.message);
+          
+        });
+      } else {
+        // DO SOMETHING ELSE
+      }
+    });
+  }
+
+  iniciar(id: number){
+    this.openIniciarConfirm(id);
+  }
+
+  openIniciarConfirm(id: number): void {
+    this._dialogService.openConfirm({
+      message: 'Tem certeza que deseja iniciar esse evento?',
+      disableClose: true, // defaults to false
+      viewContainerRef: this._viewContainerRef, //OPTIONAL
+      title: 'Iniciar evento', //OPTIONAL, hides if not provided
+      cancelButton: 'Não', //OPTIONAL, defaults to 'CANCEL'
+      acceptButton: 'Sim', //OPTIONAL, defaults to 'ACCEPT'
+      width: '500px', //OPTIONAL, defaults to 400px
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (accept) {
+        this.eventoService.iniciar(id).subscribe(dados => {
+          this.messageService.toastSuccess('Evento iniciado com sucesso.');
+          this.listar();
+        },
+        (error: any) => {
+          console.log(error.error.message);
+          this.messageService.toastError(error.error.message);
+          
+        });
+      } else {
+        // DO SOMETHING ELSE
+      }
     });
   }
 

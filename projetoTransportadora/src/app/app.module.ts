@@ -37,12 +37,12 @@ import { UsuarioFormComponent } from './view/usuario/usuario-form/usuario-form.c
 import { UsuarioListComponent } from './view/usuario/usuario-list/usuario-list.component';
 import { UsuarioSearchComponent } from './view/usuario/usuario-search/usuario-search.component';
 import { UsuarioDetailComponent } from './view/usuario/usuario-detail/usuario-detail.component';
-import { LoginComponent } from './view/login/login/login.component';
 import { FuncionarioService } from './service/funcionario.service';
 import { TransporteService } from './service/transporte.service';
 import { EventoListComponent } from './view/evento/evento-list/evento-list.component';
 import { EventoSearchComponent } from './view/evento/evento-search/evento-search.component';
 import { EventoDetailComponent } from './view/evento/evento-detail/evento-detail.component';
+import { HomeComponent } from './view/home/home/home.component';
 
 
 @NgModule({
@@ -62,10 +62,10 @@ import { EventoDetailComponent } from './view/evento/evento-detail/evento-detail
     UsuarioListComponent,
     UsuarioSearchComponent,
     UsuarioDetailComponent,
-    LoginComponent,
     EventoListComponent,
     EventoSearchComponent,
     EventoDetailComponent,
+    HomeComponent,
   
   ],
   imports: [

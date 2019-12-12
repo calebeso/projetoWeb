@@ -10,12 +10,15 @@ import { TipoAcaoValues } from 'src/app/model/tipo-acao';
 })
 export class EventoListComponent implements OnInit {
 
+  
+
   @Input() evento : Evento[];
 
   @Output() selecionarEvento = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+   
   }
 
   selecionar(id: any, acao: number) {

@@ -10,12 +10,12 @@ import { TransporteDetailComponent} from './view/transporte/transporte-detail/tr
 import { UsuarioFormComponent } from './view/usuario/usuario-form/usuario-form.component';
 import { UsuarioSearchComponent } from './view/usuario/usuario-search/usuario-search.component';
 import { UsuarioDetailComponent } from './view/usuario/usuario-detail/usuario-detail.component';
-import { LoginComponent } from './view/login/login/login.component';
 import { EventoSearchComponent } from './view/evento/evento-search/evento-search.component';
 import { EventoDetailComponent } from './view/evento/evento-detail/evento-detail.component';
+import { HomeComponent } from './view/home/home/home.component';
 const routes: Routes = [
   {
-    component: LoginComponent,
+    component: HomeComponent,
     path: ''
   },
   {

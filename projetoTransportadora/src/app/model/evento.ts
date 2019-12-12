@@ -3,6 +3,8 @@ import { Status } from './situacao-evento';
 import { Transporte } from './transporte';
 import { Funcionario } from './funcionario';
 
+
+//Modelo de evento// 
 export class Evento {
     constructor(
         public id: number,

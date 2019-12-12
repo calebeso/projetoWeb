@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Evento } from 'src/app/model/evento';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EventoService } from 'src/app/service/evento.service';
 import { MessagesService } from 'src/app/service/messages.service';
-import { ParserToDateService } from 'src/app/service/parser-to-date.service';
 import { DateAdapter } from '@angular/material/core';
+import { EventoService } from 'src/app/service/evento.service';
+import { Funcionario } from 'src/app/model/funcionario';
+import { Transporte } from 'src/app/model/transporte';
+import { FuncionarioService } from 'src/app/service/funcionario.service';
+import { TransporteService } from 'src/app/service/transporte.service';
 
 @Component({
   selector: 'app-evento-form',
@@ -14,31 +17,32 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class EventoFormComponent implements OnInit {
 
+  public eventoForm : FormGroup; 
 
-  public eventoForm: FormGroup;
-
-
-  public evento: Evento;
-
-
+  private evento : Evento; 
 
   private isOnUpdate: boolean = false;
 
+  public funcionarioList: Array<Funcionario> = [];
+
+  public transporteList: Array<Transporte> = [];
+
   constructor(private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
+    private messageService: MessagesService,
+    private _adapter: DateAdapter<any>,
     private eventoService: EventoService,
-    private messageService : MessagesService,
-    private parserToDate: ParserToDateService,
-    private _adapter: DateAdapter<any>
-    ) { }
+    private funcionarioService: FuncionarioService,
+    private transporteService: TransporteService) { }
 
   ngOnInit() {
-
-    this.evento = new Evento(null, null, null, null, null, null, null, null);
+    this.evento = new Evento(null, null, null, null, null, null, null, null, null);
     this.createForm();
+    this.listarFuncionarios("");
+    this.listarTransporte("");
     this.evento.id = this.activatedRoute.snapshot.params['id'];
-    if(this.evento.id){
+    if (this.evento.id){
       this.loadToEdit();
     }
   }
@@ -47,84 +51,127 @@ export class EventoFormComponent implements OnInit {
 
     this.eventoForm = this.fb.group(
       {
-      nome: [null, { validators: [Validators.required], updateOn: 'blur' }],
-      km: [null, { validators: [Validators.required], updateOn: 'blur' }], 
-      cidadeDestino: [null, { validators: [Validators.required], updateOn: 'blur' }],
+      nome: [null, { validators: [Validators.required, Validators.maxLength(144)], updateOn: 'blur' }],
+      km: [null, { validators: [Validators.required, Validators.maxLength(144)], updateOn: 'blur' }],
+      cidadeDestino: [null, { validators: [Validators.required, Validators.maxLength(144)], updateOn: 'blur' }],
       dataSaida: [null, { validators: [Validators.required], updateOn: 'blur' }],
-      dataChegada: [null, { validators: [Validators.required], updateOn: 'blur' }],
       horaSaida: [null, { validators: [Validators.required], updateOn: 'blur' }],
-      previsaoChegada: [null, { validators: [Validators.required], updateOn: 'blur' }],
+      funcionario: [null, { validators: [Validators.required, Validators.maxLength(144)], updateOn: 'select' }],
+      transporte: [null, { validators: [Validators.required, Validators.maxLength(144)], updateOn: 'select' }],
+
     }
     );
 
     this._adapter.setLocale('pt');
+
   }
 
   onSave() {
     if (this.eventoForm.valid) {
 
       this.evento.nome = this.eventoForm.get("nome").value;
+      var fun : Funcionario = this.eventoForm.get("funcionario").value;
+      this.evento.funcionario = fun;
+      var tran : Transporte = this.eventoForm.get("transporte").value;
+      this.evento.transporte = tran; 
       this.evento.km = this.eventoForm.get("km").value;
       this.evento.cidadeDestino = this.eventoForm.get("cidadeDestino").value;
-      this.evento.dataChegada = this.eventoForm.get("dataChegada").value;
       this.evento.dataSaida = this.eventoForm.get("dataSaida").value;
       this.evento.horaSaida = this.eventoForm.get("horaSaida").value;
-      this.evento.previsaoChegada = this.eventoForm.get("previsaoChegada").value;
       console.log(this.evento);
+
 
       if(this.evento.id == null){
         this.eventoService.cadastrar(this.evento).subscribe(res => {
           this.evento = res;
-          this.messageService.toastSuccess('Departamento cadastrado com sucesso.');
+          this.messageService.toastSuccess('Evento cadastrado com sucesso.');
           this.onBack();
         },
           (error: any) => {
             this.messageService.toastError(error.error.message);
           });
-      }else{
+      }
+      else {
         this.eventoService.editar(this.evento).subscribe(res => {
           this.evento = res;
           this.isOnUpdate = true;
           this.messageService.toastSuccess('Evento atualizado com sucesso.');
           this.onBack();
         },
-          (error: any) => {
-            this.messageService.toastError(error.error.message);
-          }
-          );
+        (error: any) => {
+          this.messageService.toastError(error.error.message);
+        });
       }
 
     } else {
       this.messageService.toastWarnning('Preencha todos os campos obrigatórios antes de salvar.');
-      
-    }
-}
 
-loadToEdit(){
-  this.eventoService.detalhar(this.evento.id).subscribe(res => {
-    this.eventoForm.get("nome").setValue(res.nome);
-    this.eventoForm.get("km").setValue(res.km);
-    this.eventoForm.get("cidadeDestino").setValue(res.km);
-    this.eventoForm.get("dataChegada").setValue(res.dataChegada);
-    this.eventoForm.get("dataSaida").setValue(res.dataSaida);
-    this.eventoForm.get("horaSaida").setValue(res.horaSaida);
-    this.eventoForm.get("previsaoChegada").setValue(res.previsaoChegada);
-    this.isOnUpdate = true;
-  },
-  (error: any) => {
-    this.messageService.toastError(error.error.message);
+    }
   }
-  );
-}
-  
+
+  loadToEdit() {
+    this.eventoService.detalhar(this.evento.id).subscribe(res => {
+      this.eventoForm.get("nome").setValue(res.nome);
+      this.eventoForm.get("km").setValue(res.km);
+      this.eventoForm.get("cidadeDestino").setValue(res.cidadeDestino);
+      this.eventoForm.get("dataSaida").setValue(res.dataSaida);
+      this.eventoForm.get("horaSaida").setValue(res.horaSaida);
+      this.eventoForm.get("funcionario").setValue(res.funcionario);
+      this.eventoForm.get("transporte").setValue(res.transporte);
+      this.isOnUpdate = true;
+    },
+      (error: any) => {
+        this.messageService.toastError(error.error.message);
+      });
+
+  }
 
   onBack() {
-    if(!this.isOnUpdate){
+    console.log(this.funcionarioList);
+    if (!this.isOnUpdate) {
       this.router.navigate(['../'], { relativeTo: this.activatedRoute });
-    }else{
+    } else {
       this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
     }
-    
+
+  } 
+
+  displayFuncionario(funcionario?: Funcionario): string | undefined {
+    return funcionario ? funcionario.nome : undefined;
   }
+
+  listarFuncionarios(filter: string) {
+    this.funcionarioService.listar().subscribe(dados => {
+      this.funcionarioList = dados;
+    },
+      (error: any) => {
+        this.messageService.toastError(error.error.message);
+      });
+  }
+
   
+
+  selectFuncionario(event: any) {
+    this.eventoForm.get("funcionario").setValue(event.option.value);
+  }
+
+
+  /* Display de transporte */
+
+  displayTransporte(transporte?: Transporte): string | undefined {
+    return transporte ? transporte.modelo : undefined;
+  }
+
+  listarTransporte(filter: string) {
+    this.transporteService.listar().subscribe(dados => {
+      this.transporteList = dados;
+    },
+      (error: any) => {
+        this.messageService.toastError(error.error.message);
+      });
+  }
+
+  selectTransporte(event: any) {
+    this.eventoForm.get("transporte").setValue(event.option.value);
+  }
 }

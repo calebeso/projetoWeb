@@ -17,14 +17,19 @@ import { TransporteService } from 'src/app/service/transporte.service';
 })
 export class EventoFormComponent implements OnInit {
 
+  //Evento form
   public eventoForm : FormGroup; 
 
+  //Objeto evento
   private evento : Evento; 
 
+  //Atualização
   private isOnUpdate: boolean = false;
 
+  //Lista de funcionarios
   public funcionarioList: Array<Funcionario> = [];
 
+  //Lista de transportes
   public transporteList: Array<Transporte> = [];
 
   constructor(private fb: FormBuilder,
@@ -36,6 +41,7 @@ export class EventoFormComponent implements OnInit {
     private funcionarioService: FuncionarioService,
     private transporteService: TransporteService) { }
 
+  //Metodo de iniciação
   ngOnInit() {
     this.evento = new Evento(null, null, null, null, null, null, null, null, null);
     this.createForm();
@@ -47,6 +53,7 @@ export class EventoFormComponent implements OnInit {
     }
   }
 
+  //Metodo pra criar form
   public createForm(){
 
     this.eventoForm = this.fb.group(
@@ -66,6 +73,7 @@ export class EventoFormComponent implements OnInit {
 
   }
 
+  //Metodo para salvar evento
   onSave() {
     if (this.eventoForm.valid) {
 
@@ -109,6 +117,7 @@ export class EventoFormComponent implements OnInit {
     }
   }
 
+  //Metodo para popular os campos com os dados
   loadToEdit() {
     this.eventoService.detalhar(this.evento.id).subscribe(res => {
       this.eventoForm.get("nome").setValue(res.nome);
@@ -126,6 +135,7 @@ export class EventoFormComponent implements OnInit {
 
   }
 
+  //Metodo para voltar pagina
   onBack() {
     console.log(this.funcionarioList);
     if (!this.isOnUpdate) {
@@ -135,6 +145,8 @@ export class EventoFormComponent implements OnInit {
     }
 
   } 
+
+  //Display de funcionario
 
   displayFuncionario(funcionario?: Funcionario): string | undefined {
     return funcionario ? funcionario.nome : undefined;
@@ -149,14 +161,12 @@ export class EventoFormComponent implements OnInit {
       });
   }
 
-  
-
   selectFuncionario(event: any) {
     this.eventoForm.get("funcionario").setValue(event.option.value);
   }
 
 
-  /* Display de transporte */
+  // Display de transporte //
 
   displayTransporte(transporte?: Transporte): string | undefined {
     return transporte ? transporte.modelo : undefined;

@@ -38,7 +38,7 @@
                                     Máximo 144 caracteres.
                                 </mat-error>
                                 <mat-error *ngIf="eventoForm.get('cidadeDestino').hasError('required')">
-                                    Nome é obrigatório.
+                                    Destino é obrigatório.
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -52,7 +52,7 @@
                                     Máximo 144 caracteres.
                                 </mat-error>
                                 <mat-error *ngIf="eventoForm.get('km').hasError('required')">
-                                    Nome é obrigatório.
+                                    Distância é obrigatório.
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -72,7 +72,7 @@
                                 <mat-label> Hora </mat-label>
                                 <input matInput type="time" placeholder="Escolha uma data" formControlName="horaSaida" required>
                                 <mat-error *ngIf="eventoForm.get('horaSaida').hasError('required')">
-                                    Nome é obrigatório.
+                                    Hora de saída é obrigatório.
                                 </mat-error>
                             </mat-form-field>
 
@@ -89,7 +89,7 @@
                                     </mat-option>
                                 </mat-autocomplete>
                                 <mat-error *ngIf="eventoForm.get('funcionario').hasError('required')">
-                                    Departamento é obrigatório.
+                                    Funcionário é obrigatório.
                                 </mat-error>
 
                             </mat-form-field>
@@ -105,6 +105,9 @@
                                         {{item.modelo}}
                                     </mat-option>
                                 </mat-autocomplete>
+                                <mat-error *ngIf="eventoForm.get('transporte').hasError('required')">
+                                    Transporte é obrigatório.
+                                </mat-error>
 
                             </mat-form-field>
                         </div>

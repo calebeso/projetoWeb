@@ -14,6 +14,7 @@ import * as moment from 'moment';
 })
 export class FuncionarioDetailComponent implements OnInit {
 
+   //Instancia objeto evento//
   public funcionario: Funcionario;
 
   constructor(private funcionarioService: FuncionarioService,
@@ -21,6 +22,8 @@ export class FuncionarioDetailComponent implements OnInit {
     private router: Router,
     private messageService: MessagesService) { }
 
+
+    //Metódo de iniciação
   ngOnInit() {
     this.funcionario = new Funcionario(null, null, null, null, null, null);
     this.funcionario.id = this.activatedRoute.snapshot.params['id'];
@@ -30,7 +33,7 @@ export class FuncionarioDetailComponent implements OnInit {
     
   }
 
-
+//Metódo que popula os campos com os dados corretos
   loadDados(){
     this.funcionarioService.detalhar(this.funcionario.id).subscribe(res => {
       this.funcionario = new Funcionario(res.id, res.nome, res.cpf, res.cnh, res.dataNascimento, res.eventos);
@@ -43,13 +46,14 @@ export class FuncionarioDetailComponent implements OnInit {
     
   }
 
+//Volta a página
   onBack() {
 
     this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
     
   }
 
-
+//Redireciona para página de alteração do evento
   navigateToEdit() {
     this.router.navigate(['../../alterar/'+this.funcionario.id], { relativeTo: this.activatedRoute });
   }
