@@ -11,13 +11,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -42,14 +42,11 @@ public class Evento extends AbstractEntity implements Serializable {
 	
 	private LocalDate dataSaida;
 	
-	
-	private LocalDate dataChegada;
-	
+		
 	private LocalTime horaSaida;
 	
-	private LocalTime previsaoChegada; 
 	
-	@NotNull
+	@Getter
 	@Enumerated( EnumType.ORDINAL )
 	private SituacaoEvento status;
 	
@@ -64,14 +61,5 @@ public class Evento extends AbstractEntity implements Serializable {
 	optional = false)
 	private Transporte transporte; 
 	
-	
-	public boolean verificaSeIniciado(Evento evento) {
-		if(evento instanceof Evento) {
-			Evento eventoStatus = (Evento) evento;
-			return this.getId().equals(eventoStatus.getId());
-		}else {
-			return false;
-	}
-	}
 	
 }

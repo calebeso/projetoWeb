@@ -41,4 +41,9 @@ public class TransporteResource {
 	public List<Transporte> listar() {
 		return this.transporteService.listarTransportes();
 	}
+	
+	@GetMapping("/find")
+	public Transporte detalhar(@RequestParam("id") Long id) {
+		return this.transporteService.detalharTransporte(id);
+	}
 }

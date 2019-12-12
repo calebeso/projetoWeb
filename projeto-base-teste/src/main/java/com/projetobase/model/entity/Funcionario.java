@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.util.Assert;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,9 +47,11 @@ public class Funcionario extends AbstractEntity implements Serializable {
 	@NotNull
 	private LocalDate dataNascimento; 
 	
-	@OneToMany(targetEntity = Evento.class, fetch = FetchType.EAGER,
+	@JsonIgnoreProperties("funcionario")
+	@OneToMany(targetEntity = Evento.class,
+			fetch = FetchType.EAGER,
 			mappedBy="funcionario")
-	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+	private List<Evento> evento = new ArrayList<Evento>();
 	
 	@Transient
 	private Integer idade; 

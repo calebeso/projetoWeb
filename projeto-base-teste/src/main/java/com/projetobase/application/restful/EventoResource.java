@@ -37,9 +37,29 @@ public class EventoResource {
 		this.eventoService.removerEvento(id);
 	}
 	
+	@GetMapping( "/start" )
+	public void Inicia(@RequestParam("id") Long id) {
+		this.eventoService.iniciarEvento(id);
+	}
+	
+	@GetMapping( "/stop" )
+	public void Finaliza(@RequestParam("id") Long id) {
+		this.eventoService.finalizarEvento(id);
+	}
+	
+	@GetMapping ("/cancel")
+	public void Cancela(@RequestParam("id") Long id) {
+		this.eventoService.cancelarEvento(id);
+	}
+	
 	@GetMapping("/list")
 	public List<Evento> listar() {
 		return this.eventoService.listarEventos();
+	}
+	
+	@GetMapping("/find")
+	public Evento detalhar(@RequestParam("id") Long id) {
+		return this.eventoService.detalharEvento(id);
 	}
 	
 	

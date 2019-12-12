@@ -48,11 +48,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("TESTE");
 		evento.setCidadeDestino("TESTE");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("600");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);
@@ -76,11 +74,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("");
 		evento.setCidadeDestino("TESTE");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("600");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);
@@ -101,11 +97,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("TESTE1");
 		evento.setCidadeDestino("");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("600");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);
@@ -126,11 +120,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("TESTE1");
 		evento.setCidadeDestino("teste");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);
@@ -164,6 +156,30 @@ public class EventoTests extends AbstractIntegrationTests{
 	}
 	
 	@Test
+	@Sql({ "/dataset/truncate.sql",
+		"/dataset/funcionario.sql",
+		"/dataset/transporte.sql",
+		"/dataset/evento.sql"
+		})
+	public void cancelarEventoMustPass() {
+		Evento evento = this.eventoService.cancelarEvento(1001);
+		Assert.assertTrue(evento.getStatus().equals(SituacaoEvento.CANCELADO));
+	}
+	
+	
+	@Test(expected = ConstraintViolationException.class)
+	@Sql({ "/dataset/truncate.sql",
+		"/dataset/funcionario.sql",
+		"/dataset/transporte.sql",
+		"/dataset/evento.sql"
+		})
+	public void finalizarEventoMustFailEventoNaoIniciado() {
+		Evento evento = this.eventoService.finalizarEvento(1001);
+		Assert.assertTrue(evento.getStatus().equals(SituacaoEvento.FINALIZADO));
+	}
+	
+	
+	@Test
 	@Sql({
 		"/dataset/truncate.sql",
 		"/dataset/funcionario.sql",
@@ -174,11 +190,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("TESTE");
 		evento.setCidadeDestino("TESTE");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("600");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);
@@ -235,11 +249,11 @@ public class EventoTests extends AbstractIntegrationTests{
 		"/dataset/evento.sql"})
 	public void atualizarEventoMustPass() {
 		Evento evento = this.eventoRepository.findById(1001L).orElse(null);
-		evento.setDataChegada(LocalDate.of(2020, Month.JANUARY, 1));
+		evento.setDataSaida(LocalDate.of(2020, Month.JANUARY, 1));
 
 		eventoService.atualizarEvento(evento);
 
-		Assert.assertTrue(evento.getDataChegada().getYear() == 2020);
+		Assert.assertTrue(evento.getDataSaida().getYear() == 2020);
 
 	}
 	
@@ -252,11 +266,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("");
 		evento.setCidadeDestino("TESTE");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("600");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);
@@ -274,11 +286,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("ATT");
 		evento.setCidadeDestino("");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("600");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);
@@ -296,11 +306,9 @@ public class EventoTests extends AbstractIntegrationTests{
 		Evento evento = new Evento();
 		evento.setNome("ATT");
 		evento.setCidadeDestino("CIDADE");
-		evento.setDataChegada(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setDataSaida(LocalDate.of(2019, Month.JANUARY, 01));
 		evento.setKm("");
 		evento.setHoraSaida(LocalTime.of(10, 00));
-		evento.setPrevisaoChegada(LocalTime.of(19,30));
 		Funcionario funcionario = this.funcionarioRepository.findById(1001L).orElse(null);
 		evento.setFuncionario(funcionario);
 		Transporte transporte = this.transporteRepository.findById(1001L).orElse(null);

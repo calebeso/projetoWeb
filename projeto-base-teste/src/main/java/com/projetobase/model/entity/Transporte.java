@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,9 +37,11 @@ private static final long serialVersionUID = 1L;
 	@Column(nullable = false)
     private Double consumoTransporte;
 	
-	@OneToMany(targetEntity = Evento.class, fetch = FetchType.EAGER,
+	@JsonIgnoreProperties("transporte")
+	@OneToMany(targetEntity = Evento.class,
+			fetch = FetchType.EAGER,
 			mappedBy="transporte")
-	private List<Funcionario> funcionarios = new ArrayList<Funcionario>(); 
+	private List<Evento> evento = new ArrayList<Evento>();
 	
 	public Transporte(Long id) {
 		super.setId(id);

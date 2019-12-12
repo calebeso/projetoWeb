@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import com.projetobase.model.entity.Evento;
 import com.projetobase.model.entity.SituacaoEvento;
@@ -35,8 +36,17 @@ public class EventoService {
 	/*Finalizar evento*/
 	public Evento finalizarEvento(long id) {
 		Evento evento = this.eventoRepository.findById(id).orElse(null);
-		evento.setStatus(SituacaoEvento.FINALIZADO);
-		return this.eventoRepository.save(evento);
+		if(evento.getStatus() == SituacaoEvento.INICIADO) {
+			evento.setStatus(SituacaoEvento.FINALIZADO);
+		}return this.eventoRepository.save(evento);
+	}
+	
+	/*Cancela evento*/
+	public Evento cancelarEvento(long id) {
+		Evento evento = this.eventoRepository.findById(id).orElse(null);
+		if(evento.getStatus() == SituacaoEvento.INICIADO) {
+			evento.setStatus(SituacaoEvento.CANCELADO);
+		}return this.eventoRepository.save(evento);
 	}
 	
 	
@@ -63,6 +73,17 @@ public class EventoService {
 	/*Listar por transporte*/
 	public Page<Evento> listarEventoPorTransporte(long transporteId, PageRequest pageable){
 		return this.eventoRepository.findByTransporteId(transporteId, pageable);
+	}
+	
+	/*Detlha evento*/
+	public Evento detalharEvento(long id) {
+		
+		Evento  evento = this.eventoRepository.findById(id).orElse(null);
+		evento.setStatus(SituacaoEvento.CRIADO);
+		
+		Assert.notNull(evento, "O Id "+ id +" não foi encontrado.");
+		
+		return evento;
 	}
 	
 }
