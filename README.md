@@ -1,6 +1,6 @@
 ## CJ TRANSPORTADORA 
 
-> Projeto universitário que visa a implementação e o desenvolvimento de um Sistema de Gerenciamento de Transporte. Com o sistema ser possível 
+> Projeto universitário que visa a implementação e o desenvolvimento de um Sistema de Gerenciamento de Transporte. Com o sistema será possível 
 > efetuar o cadastro de caminhoes e motoristas e gerenciar o cadastro de transporte até seu destino final. 
 
 ## TECNOLOGIAS
